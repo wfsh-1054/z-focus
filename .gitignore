@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment and Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Deprecated & Redundant Files (Z-Focus Pro Cleanup)
+# These files are identified as non-essential for the current Pollinations-based workflow
+services/geminiService.ts
+components/ApiKeyModal.tsx
+utils/imageConverter.ts
+app-manifest.yaml
+
+# IDE & Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
