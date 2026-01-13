@@ -81,6 +81,16 @@ const App: React.FC = () => {
     localStorage.setItem('zfocus_pollinations_key', apiKey);
   }, [apiKey]);
 
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#api_key=')) {
+      const key = hash.substring('#api_key='.length);
+      setApiKey(key);
+      // Clean the URL without reloading the page
+      window.history.pushState("", document.title, window.location.pathname + window.location.search);
+    }
+  }, []); // Run only once on component mount
+
   const handleEnhancePrompt = async () => {
     if (!prompt.trim() && !currentImage) return;
     setIsEnhancing(true);
@@ -146,6 +156,11 @@ const App: React.FC = () => {
     setCurrentImage(null);
     setPrompt('');
     closeAllSidebars();
+  };
+  
+  const handleGetApiKey = () => {
+    const redirectUrl = window.location.href.split('#')[0];
+    window.open(`https://enter.pollinations.ai/authorize?redirect_url=${encodeURIComponent(redirectUrl)}`, '_self');
   };
 
   return (
@@ -289,9 +304,17 @@ const App: React.FC = () => {
           </div>
           
           <div className="space-y-4">
-            <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest flex items-center gap-2">
-              <KeyIcon className="w-3.5 h-3.5" /> Pollinations API key
-            </label>
+            <div className="flex justify-between items-center">
+                <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest flex items-center gap-2">
+                <KeyIcon className="w-3.5 h-3.5" /> Pollinations API key
+                </label>
+                <button 
+                    onClick={handleGetApiKey}
+                    className="text-[10px] font-bold text-primary-500 hover:text-primary-400 transition-colors"
+                >
+                    Get Key
+                </button>
+            </div>
             <input 
               type="password" 
               value={apiKey} 
