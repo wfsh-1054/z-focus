@@ -77,14 +77,14 @@ const App: React.FC = () => {
     }
   }, [prompt]);
 
+  // This effect now only handles SAVING the key
   useEffect(() => {
     if (apiKey) {
       localStorage.setItem('zfocus_pollinations_key', apiKey);
-    } else {
-      localStorage.removeItem('zfocus_pollinations_key');
     }
   }, [apiKey]);
 
+  // This effect handles the initial key loading from URL hash
   useEffect(() => {
     const hash = window.location.hash;
     if (hash.startsWith('#api_key=')) {
@@ -165,7 +165,8 @@ const App: React.FC = () => {
   };
 
   const handleLogout = () => {
-    setApiKey('');
+    localStorage.removeItem('zfocus_pollinations_key'); // Directly remove from storage
+    setApiKey(''); // Update state to re-render UI
   };
 
   return (
