@@ -95,7 +95,7 @@ const App: React.FC = () => {
       );
       setPrompt(enhanced);
     } catch (err: any) {
-      setError("AI 優化暫時不可用，請直接嘗試生成。");
+      setError("AI enhancement is temporarily unavailable. Please try generating directly.");
     } finally {
       setIsEnhancing(false);
     }
@@ -131,7 +131,7 @@ const App: React.FC = () => {
       setCurrentImage(newImage);
       setHistory(prev => [newImage, ...prev]);
     } catch (err: any) {
-      setError("生成失敗：伺服器繁忙或參數錯誤，請檢查連線。");
+      setError("Generation failed: Server is busy or parameters are incorrect. Please check your connection.");
     } finally {
       setIsGenerating(false);
     }
@@ -241,7 +241,7 @@ const App: React.FC = () => {
                     ref={textareaRef}
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={currentImage ? "輸入修改指令 (例如: 將背景改為森林、加入墨鏡...)" : "輸入繪圖提示詞或靈感..."}
+                    placeholder={currentImage ? "Enter modification instructions (e.g., change background to a forest, add sunglasses...)" : "Enter drawing prompts or inspiration..."}
                     className="w-full bg-transparent text-gray-100 text-[15px] leading-relaxed outline-none resize-none min-h-[48px] custom-scrollbar placeholder:text-white/20 font-medium"
                     onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleGenerate())}
                     rows={1}
@@ -251,7 +251,7 @@ const App: React.FC = () => {
                    <button 
                     onClick={handleEnhancePrompt} 
                     disabled={isEnhancing} 
-                    title={currentImage ? "AI 自然語言修改" : "AI 靈感優化"}
+                    title={currentImage ? "AI Natural Language Modification" : "AI Inspiration Optimization"}
                     className={`p-3.5 rounded-2xl transition-all border border-white/5 ${isEnhancing ? 'bg-primary-600/30 animate-pulse text-primary-400' : 'bg-white/[0.04] text-gray-400 hover:text-white hover:bg-white/[0.08]'}`}
                    >
                     {isEnhancing ? <ArrowPathIcon className="w-5 h-5 animate-spin" /> : currentImage ? <WrenchScrewdriverIcon className="w-5 h-5" /> : <SparklesIcon className="w-5 h-5" />}
