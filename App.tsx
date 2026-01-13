@@ -139,7 +139,7 @@ const App: React.FC = () => {
 
   const handleDownload = async () => {
     if (!currentImage) return;
-    await downloadImageAs(currentImage.url, `zfocus-pro-${Date.now()}`, 'png');
+    await downloadImageAs(currentImage.url, `zfocus-${Date.now()}`, 'png');
   };
 
   const resetCanvas = () => {
@@ -158,8 +158,8 @@ const App: React.FC = () => {
               <ClockIcon className="w-5 h-5" />
            </button>
            <div className="hidden sm:flex flex-col">
-              <h1 className="font-black tracking-widest text-[10px] uppercase text-white/80">Z-Focus Pro</h1>
-              <span className="text-[9px] text-white/20 font-mono">Nanobanana Engine v2.6</span>
+              <h1 className="font-black tracking-widest text-[10px] uppercase text-white/80">Z-Focus</h1>
+              <span className="text-[9px] text-white/20 font-mono">Powered by Pollinations</span>
            </div>
         </div>
 
@@ -228,7 +228,7 @@ const App: React.FC = () => {
             </div>
           )}
 
-          <LoadingOverlay isLoading={isGenerating} message="Synthesizing Nanobanana Logic..." />
+          <LoadingOverlay isLoading={isGenerating} message="Synthesizing image..." />
         </section>
 
         {/* PROMPT PANEL */}
@@ -290,7 +290,7 @@ const App: React.FC = () => {
           
           <div className="space-y-4">
             <label className="text-[10px] font-black text-gray-600 uppercase tracking-widest flex items-center gap-2">
-              <KeyIcon className="w-3.5 h-3.5" /> Pollitations API key
+              <KeyIcon className="w-3.5 h-3.5" /> Pollinations API key
             </label>
             <input 
               type="password" 
@@ -327,7 +327,7 @@ const App: React.FC = () => {
              <div className="flex flex-col gap-2">
                <span className="text-[9px] text-white/20 font-mono">Infrastructure</span>
                <p className="text-[9px] text-white/40 uppercase tracking-widest leading-relaxed font-bold">
-                 Nanobanana Pro distributed inference active.
+                 Powered by Pollinations
                </p>
              </div>
           </div>
