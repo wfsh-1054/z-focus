@@ -78,7 +78,11 @@ const App: React.FC = () => {
   }, [prompt]);
 
   useEffect(() => {
-    localStorage.setItem('zfocus_pollinations_key', apiKey);
+    if (apiKey) {
+      localStorage.setItem('zfocus_pollinations_key', apiKey);
+    } else {
+      localStorage.removeItem('zfocus_pollinations_key');
+    }
   }, [apiKey]);
 
   useEffect(() => {
@@ -86,10 +90,9 @@ const App: React.FC = () => {
     if (hash.startsWith('#api_key=')) {
       const key = hash.substring('#api_key='.length);
       setApiKey(key);
-      // Clean the URL without reloading the page
       window.history.pushState("", document.title, window.location.pathname + window.location.search);
     }
-  }, []); // Run only once on component mount
+  }, []);
 
   const handleEnhancePrompt = async () => {
     if (!prompt.trim() && !currentImage) return;
@@ -118,8 +121,6 @@ const App: React.FC = () => {
     if (isSmallScreen()) closeAllSidebars();
 
     try {
-      // If we are modifying, we might want to perform an AI enhancement automatically 
-      // but let's keep it manual for user control as per the "Modify" button logic.
       const resultBase64 = await generateImage({
         prompt, 
         aspectRatio, 
@@ -161,6 +162,10 @@ const App: React.FC = () => {
   const handleGetApiKey = () => {
     const redirectUrl = window.location.href.split('#')[0];
     window.open(`https://enter.pollinations.ai/authorize?redirect_url=${encodeURIComponent(redirectUrl)}`, '_self');
+  };
+
+  const handleLogout = () => {
+    setApiKey('');
   };
 
   return (
@@ -309,10 +314,10 @@ const App: React.FC = () => {
                 <KeyIcon className="w-3.5 h-3.5" /> Pollinations API key
                 </label>
                 <button 
-                    onClick={handleGetApiKey}
+                    onClick={apiKey ? handleLogout : handleGetApiKey}
                     className="text-[10px] font-bold text-primary-500 hover:text-primary-400 transition-colors"
                 >
-                    Get Key
+                    {apiKey ? 'Logout' : 'Get Key'}
                 </button>
             </div>
             <input 
