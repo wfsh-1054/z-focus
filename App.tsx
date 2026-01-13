@@ -152,7 +152,7 @@ const App: React.FC = () => {
     <div className="h-screen w-screen bg-[#050505] text-gray-200 flex overflow-hidden relative font-inter">
       
       {/* HEADER */}
-      <header className="fixed top-0 left-0 right-0 h-16 flex items-center justify-between px-4 sm:px-6 z-[100] bg-transparent">
+      <header className={`fixed top-0 left-0 right-0 h-16 flex items-center justify-between px-4 sm:px-6 z-[100] bg-transparent transition-all duration-500 ease-in-out ${showLeftSidebar ? 'lg:left-80' : ''} ${showRightSidebar ? 'lg:right-80' : ''}`}>
         <div className="flex items-center gap-4">
            <button onClick={toggleLeftSidebar} className={`p-2.5 border rounded-xl transition-all backdrop-blur-3xl shadow-lg ${showLeftSidebar ? 'bg-primary-600 border-primary-500 text-white' : 'bg-black/40 hover:bg-white/10 border-white/5 text-gray-400'}`}>
               <ClockIcon className="w-5 h-5" />
